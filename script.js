@@ -1,10 +1,12 @@
 var isLoading = false;
 var people = [];
+var person = {};
 var page = 1;
 
 var lista = document.querySelector("#lista");
 var pagination = document.querySelector("#pagination");
 var loading = document.querySelector("#loading");
+var form = document.querySelector("#form");
 
 const render = (el, f) => { 
   return (p) => el.innerHTML = f(p);
@@ -41,8 +43,55 @@ const handleRemovePeople = (index) => {
   renderPeople(people);
 }
 
+
+
+
+
+const generateForm = (person) => {
+
+  return `
+    <div class="modal" id="modal">
+    <div class="modal-container">
+        <div class="modal-header">
+            <p class="modal-title">Change People</p>
+            <a class="close-button" href="#">&times;</a>
+        </div>
+    
+        <form id="form-person">
+            <input type="text" name="name" placeholder="Name" value="${person.name}"></input>
+            <input type="text" name="height" placeholder="Height" value="${person.height}"></input>
+            <input type="text" name="gender" placeholder="Gender" value="${person.gender}"></input>
+            <input type="text" name="mass" placeholder="Mass" value="${person.mass}"></input>
+        </form>
+      
+        <div class="buttons"><a href="#" onclick="handleSavePerson(${person.index})" class="button">SAVE</a></div>
+    </div>      
+  </div>  
+  `
+}
+
+const handleSavePerson = (index) => {
+  const person = {}
+  var form = document.querySelector('#form-person');
+
+  for ({ name, value } of form) {
+    person[name] = value;
+  }
+  people.splice(index, 1, person);
+  renderPeople(people); 
+}
+
+
+
+const renderModalEditPerson = render(form, generateForm);
+
+const handleEditPerson = (index) => {
+  person = { index, ...people[index]};
+  renderModalEditPerson(person);
+}
+
 const generatePeople = (param) => {
-  // .filter(filterContatos)
+  // 
   people = param;
   return people.map(({ name, height, gender, mass }, index) => {
     return `
@@ -52,12 +101,14 @@ const generatePeople = (param) => {
       <td data-th="Gender">${gender}</td>
       <td data-th="Mass">${mass}</td>
       <td>
-        <button>
+        <a href="#modal">
+          <button onclick="handleEditPerson(${index})">
           Edit
-        </button>
+          </button>
+        </a>
       </td>
       <td>
-        <button class="contato-remover js-contato-remover" onclick="handleRemovePeople(${index})">
+        <button onclick="handleRemovePeople(${index})">
             Remove
         </button>
       </td>   
@@ -73,11 +124,12 @@ fetchPeopleJSON(page).then(people => {
   renderPeople(people);
 })
 
-
 const handlePage = (page) => {
   fetchPeopleJSON(page).then(people => {
     renderPagination(page);
     renderPeople(people);
+  }).catch(() => {
+    alert("Houve um erro ao carregar os dados!")
   })
 }
 
