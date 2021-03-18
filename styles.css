@@ -1,0 +1,140 @@
+.title {
+  text-align: center;
+  margin: 30px 10px;
+}
+.loading {
+  margin: 230px auto;
+  display: block;
+}
+.container {
+  min-height: 550px;
+}
+.rwd-table {
+  margin: 0px auto;
+  min-width: 700px;
+}
+.rwd-table tr {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+.rwd-table th {
+  display: none;
+}
+.rwd-table td {
+  display: block;
+}
+.rwd-table td:first-child {
+  padding-top: .5em;
+}
+.rwd-table td:last-child {
+  padding-bottom: .5em;
+}
+
+.rwd-table td:before {
+  content: attr(data-th) ": ";
+  font-weight: bold;
+  width: 6.5em;
+  display: inline-block;
+}
+.rwd-table th, .rwd-table td {
+  text-align: left;
+}
+.rwd-table th, .rwd-table td {
+  display: table-cell;
+  padding: .25em .5em;
+}
+.rwd-table th:first-child, .rwd-table td:first-child {
+  padding-left: 0;
+}
+.rwd-table th:last-child, .rwd-table td:last-child {
+  padding-right: 0;
+}
+
+body {
+  padding: 0 2em;
+  font-family: Montserrat, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  color: #444;
+  background: #eee;
+}
+
+h1 {
+  font-weight: normal;
+  letter-spacing: -1px;
+  color: #34495E;
+}
+
+.rwd-table {
+  background: #34495E;
+  color: #fff;
+  border-radius: .4em;
+  overflow: hidden;
+}
+.rwd-table tr {
+  border-color: #46637f;
+}
+.rwd-table th, .rwd-table td {
+  margin: .5em 1em;
+}
+@media (min-width: 480px) {
+  .rwd-table th, .rwd-table td {
+    padding: 1em !important;
+  }
+}
+.rwd-table th, .rwd-table td:before {
+  color: #dd5;
+}
+
+ul {
+  position: relative;
+  background: #2e4053;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  border-radius: 50px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  margin: 50px auto;
+}
+
+ul li {
+  list-style: none;
+  line-height: 50px;
+  margin: 0 5px;
+}
+
+ul li.pageNumber {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+}
+
+ul li a {
+  display: block;
+  text-decoration: none;
+  color: #dd5;
+  font-weight: 600;
+  border-radius: 50%;
+}
+
+ul li.pageNumber:hover a,
+ul li.pageNumber.active a {
+  background: #dd5;
+  color: #46637f;
+}
+
+ul li:first-child {
+  margin-right: 30px;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+ul li:last-child {
+  margin-left: 30px;
+  font-weight: 700;
+  font-size: 20px;
+}
+
